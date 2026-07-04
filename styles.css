@@ -543,6 +543,7 @@ section:not(.hero):not(.marquee) {
 }
 .visit-details h4 { color: var(--primary); font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; font-family: var(--sans); margin-bottom: .5em; }
 .visit-details p { color: var(--ink-dim); font-size: .88rem; }
+.visit-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
 .visit-map {
   position: relative;
   height: 320px;
