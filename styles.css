@@ -331,7 +331,8 @@ section:not(.hero):not(.marquee) {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2.2rem;
+  overflow: hidden;
+  font-size: 4.6rem;
   line-height: 1;
 }
 .about-stats {
