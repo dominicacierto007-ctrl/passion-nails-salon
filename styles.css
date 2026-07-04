@@ -373,7 +373,7 @@ section:not(.hero):not(.marquee) {
 .menu-panel.is-active { display: block; }
 .menu-row {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: 1rem;
   padding: .9rem 0;
   border-bottom: 1px solid var(--border);
@@ -400,6 +400,61 @@ section:not(.hero):not(.marquee) {
   font-size: 1rem;
   white-space: nowrap;
 }
+.menu-add {
+  border: 1px solid var(--primary);
+  background: none;
+  color: var(--primary);
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: .78rem;
+  padding: .4em 1em;
+  border-radius: 999px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all .2s var(--ease);
+}
+.menu-add:hover { background: var(--accent-tint); }
+.menu-add.is-added {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--on-primary);
+}
+
+/* ===== Booking bar ===== */
+.booking-bar {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  z-index: 90;
+  background: var(--card);
+  border-top: 1px solid var(--border);
+  box-shadow: 0 -10px 30px -15px rgba(24,24,27,.25);
+  transform: translateY(100%);
+  transition: transform .3s var(--ease);
+}
+.booking-bar.is-visible { transform: translateY(0); }
+.booking-bar-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.booking-bar-info { font-size: .9rem; color: var(--ink-dim); }
+.booking-bar-info strong { color: var(--ink); }
+.booking-bar-list {
+  display: block;
+  font-size: .78rem;
+  color: var(--ink-faint);
+  margin-top: .2em;
+  max-width: 480px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.booking-bar-actions { display: flex; gap: .8rem; }
 
 /* ===== Team ===== */
 .team-grid {
@@ -610,6 +665,8 @@ section:not(.hero):not(.marquee) {
   .nav-toggle { display: flex; }
   .btn-book { display: none; }
   .gallery-grid { grid-template-columns: repeat(2, 1fr); }
-  .menu-row { flex-direction: column; gap: .2rem; }
+  .menu-row { flex-wrap: wrap; gap: .2rem .8rem; }
+  .menu-name { flex-basis: 100%; }
   .team-card { padding: 2rem 1.5rem; min-width: 0; width: 100%; }
+  .booking-bar-list { display: none; }
 }

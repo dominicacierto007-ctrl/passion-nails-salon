@@ -73,3 +73,50 @@ menuTabs.forEach(tab => {
     document.querySelector(`.menu-panel[data-panel="${tab.dataset.tab}"]`).classList.add('is-active');
   });
 });
+
+// Add-to-booking selection
+const selectedServices = new Map();
+const bookingBar = document.getElementById('bookingBar');
+const bookingCount = document.getElementById('bookingCount');
+const bookingList = document.getElementById('bookingList');
+const bookingClear = document.getElementById('bookingClear');
+
+function updateBookingBar() {
+  const count = selectedServices.size;
+  bookingCount.textContent = `${count} service${count === 1 ? '' : 's'}`;
+  bookingList.textContent = Array.from(selectedServices.values()).join(', ');
+  bookingBar.classList.toggle('is-visible', count > 0);
+}
+
+document.querySelectorAll('.menu-row').forEach(row => {
+  const name = row.querySelector('.menu-name').childNodes[0].textContent.trim();
+  const addBtn = document.createElement('button');
+  addBtn.type = 'button';
+  addBtn.className = 'menu-add';
+  addBtn.textContent = 'Add';
+  addBtn.setAttribute('aria-label', `Add ${name} to booking list`);
+
+  addBtn.addEventListener('click', () => {
+    if (selectedServices.has(row)) {
+      selectedServices.delete(row);
+      addBtn.classList.remove('is-added');
+      addBtn.textContent = 'Add';
+    } else {
+      selectedServices.set(row, name);
+      addBtn.classList.add('is-added');
+      addBtn.textContent = 'Added ✓';
+    }
+    updateBookingBar();
+  });
+
+  row.appendChild(addBtn);
+});
+
+bookingClear.addEventListener('click', () => {
+  selectedServices.clear();
+  document.querySelectorAll('.menu-add.is-added').forEach(btn => {
+    btn.classList.remove('is-added');
+    btn.textContent = 'Add';
+  });
+  updateBookingBar();
+});
