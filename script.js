@@ -36,6 +36,31 @@ revealEls.forEach(el => revealObserver.observe(el));
 // Footer year
 document.getElementById('year').textContent = new Date().getFullYear();
 
+// About section parallax scroll
+const aboutParallax = document.getElementById('aboutParallax');
+if (aboutParallax) {
+  const colA = aboutParallax.querySelector('.parallax-col-a');
+  const colB = aboutParallax.querySelector('.parallax-col-b');
+  let ticking = false;
+
+  const applyParallax = () => {
+    const maxScroll = aboutParallax.scrollHeight - aboutParallax.clientHeight;
+    const progress = maxScroll > 0 ? aboutParallax.scrollTop / maxScroll : 0;
+
+    const translateY = progress * -80;
+    colA.style.transform = `translate(${progress * -30}px, ${translateY}px) rotate(${progress * -6}deg)`;
+    colB.style.transform = `translate(${progress * 30}px, ${translateY}px) rotate(${progress * 6}deg)`;
+    ticking = false;
+  };
+
+  aboutParallax.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(applyParallax);
+      ticking = true;
+    }
+  });
+}
+
 // Service menu tabs
 const menuTabs = document.querySelectorAll('.menu-tab');
 const menuPanels = document.querySelectorAll('.menu-panel');
